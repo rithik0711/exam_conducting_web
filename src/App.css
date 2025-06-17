@@ -5,33 +5,46 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-image: url("/images/background.png");
   font-family: 'Poppins', sans-serif;
-
+  padding-bottom: 40px;
 }
 .main{
   background-color: rgb(255, 255, 255);
   color: black;
   border-radius: 10px;
-  height: 380px;
+  height: 400px;
   width: 350px;
   /* display: flex; */
   justify-content: center;
   align-items: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.35); 
   text-align: center;
   margin-right: 10px;
 }
+.folder{
+  display: flex;
+}
 .container{
   display: flex;
+  flex-direction: column;
   background-color: white;
   width: 900px;
-  height: 450px;
+  height: 500px;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
   text-align: center;
+  border: 10px solid rgb(94, 27, 176);
+  padding: 0px 0px 15px 0px;
+}
+.head{
+  display: flex;
+}
+.head img{
+  width: 80px;
+  height: 80px;
+  margin-right: 15px;
+  margin-top: 10px;
 }
 .main h2{
   text-align: left;
@@ -59,13 +72,16 @@ body{
   background-color: rgb(93, 21, 161);
   width: 300px;
   margin-top: 25px;
-  height: 30px;
+  margin-left: 25px;
+  height: 40px;
   border: none;
   color: white;
   font-size: 20px;
   font-weight: 500;
   border-radius: 5px;
   /* padding: 5px 5px; */
+  display: flex;
+  text-align: center;
   align-items: center;
   justify-content: center;
 }
@@ -77,7 +93,7 @@ img{
   height: 25px;
   width: 25px;
 }
-.main .google{
+.main .google-login{
   background-color: rgb(255, 255, 255);
   color: black;
   font-size: 15px;
@@ -90,9 +106,9 @@ img{
   display: flex;
   margin-left: 25px;
   padding: 5px 5px;
-  border: 2px solid black;
   width: 300px;
   border-radius: 5px;
+  text-decoration: none;
 }
 .forgot {
   display: block;  
@@ -115,9 +131,37 @@ img{
   font-size: 20px;
 }
 .system-img{
-  height: 300px;
+  height: 400px;
   width: 350px;
+  background: linear-gradient(to bottom right, #7c3aed, #6b21a8);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.system-img .icon{
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #8F5DE4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  color: white;
+}
+.system-img h3,p{
+  color: white;
+}
+.system-img p{
+  font-size: 10px;
 }
 button {
   font-family: 'Poppins', sans-serif !important;
+}
+.or{
+  color: black;
 }

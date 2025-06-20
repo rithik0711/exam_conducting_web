@@ -1,10 +1,12 @@
 .faculty-navbar{
   height: 100px;
+  width: 1480px;
   background-color: #ffffff;
   display: flex;
   align-items: center;
   border-radius: 0;
   padding: 20px;
+  max-width: 100%;
 }
 
 .faculty-navbar img {
@@ -23,14 +25,18 @@
   font-size: 25px;
   font-weight: 500;
 }
-
 .faculty-header .faculty-nav {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-left: 200px;
+  width: 100%; /* important to spread space */
+}
+.faculty-nav-group {
+  display: flex;
   align-items: center;
   gap: 40px;
 }
-
 .faculty-nav p {
   font-size: 20px;
   font-weight: 500;
@@ -38,7 +44,7 @@
   color: black;
 }
 
-.faculty-nav-dash, .faculty-nav-exam, .faculty-nav-res {
+.faculty-nav-dash, .faculty-nav-exam,.faculty-nav-ques, .faculty-nav-res {
   color: #000;
   display: flex;
   align-items: center;
@@ -53,6 +59,7 @@
 
 .faculty-nav-dash.active,
 .faculty-nav-exam.active,
+.faculty-nav-ques.active,
 .faculty-nav-res.active{
   background-color: #F3E8FF;
   color: #7E22CE;
@@ -61,7 +68,7 @@
   transition: background-color 0.3s ease;
 }
 
-.faculty-nav-dash:hover, .faculty-nav-exam:hover, .faculty-nav-res:hover{
+.faculty-nav-dash:hover, .faculty-nav-exam:hover,.faculty-nav-ques:hover, .faculty-nav-res:hover{
   color: #7E22CE;
   background-color: #F3E8FF;
   transform: scale(1.05);
@@ -130,7 +137,7 @@
 }
 
 .faculty-theme-toggle {
-  width: 56px;
+  width: 60px;
   height: 32px;
   background-color: #ccc;
   border-radius: 9999px;

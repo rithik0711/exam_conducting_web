@@ -35,6 +35,7 @@ export const Navbar = () => {
   const path = window.location.pathname;
   if (path.includes('exam')) setActiveTab('exam');
   else if (path.includes('results')) setActiveTab('results');
+  else if (path.includes('question')) setActiveTab('question');
   else setActiveTab('student');
 }, []);
 
@@ -60,6 +61,10 @@ export const Navbar = () => {
             <EditNoteIcon />
             <p>Exam</p>
           </div>
+          <div className={`question ${activeTab === 'question' ? 'active' : ''}`} onClick={() => {setActiveTab('question');navigate('/question')}}>
+            <EditNoteIcon />
+            <p>Question Bank</p>
+          </div>
           <div className={`res ${activeTab === 'results' ? 'active' : ''}`} onClick={() => {setActiveTab('results');navigate('/results');}}>
             <CreditScoreIcon />
             <p>Result</p>
@@ -67,37 +72,39 @@ export const Navbar = () => {
 
           <div className='user'>
             <div className='detail'>
-              <p>{user.name}</p>
-              <p>7376232IT239</p>
+              {/* <p>{user.name}</p>
+              <p>7376232IT239</p> */}
             </div>
+            <div className='pro'> 
+              <div
+                className='profile'
+                onClick={() => setIsOpen(!isOpen)}
+                style={{ backgroundImage: `url(${user.picture || '/images/default-profile.png'})` }}
+              ></div>
+              {isOpen && (
+                <div className="profile-box">
+                  <p>Name: {user.name}</p>
+                  <p>Email: {user.email}</p>
+                  <p>Department: {user.department}</p>
+                  <button className="close-btn" onClick={() => setIsOpen(false)}>
+                    <CloseIcon />
+                  </button>
+                </div>
+              )}
+            </div>
+
             <div
-              className='profile'
-              onClick={() => setIsOpen(!isOpen)}
-              style={{ backgroundImage: `url(${user.picture || '/images/default-profile.png'})` }}
-            ></div>
-            {isOpen && (
-              <div className="profile-box">
-                <p>Name: {user.name}</p>
-                <p>Email: {user.email}</p>
-                <p>Department: {user.department}</p>
-                <button className="close-btn" onClick={() => setIsOpen(false)}>
-                  <CloseIcon />
-                </button>
-              </div>
-            )}
-          </div>
+              className={`theme-toggle ${isDark ? 'dark' : ''}`}
+              onClick={toggleTheme}
+              role="switch"
+            >
+              <LightModeIcon className="sun-icon" />
+              <DarkModeIcon className="moon-icon" />
+              <div className="toggle-thumb" />
+            </div>
 
-          <div
-            className={`theme-toggle ${isDark ? 'dark' : ''}`}
-            onClick={toggleTheme}
-            role="switch"
-          >
-            <LightModeIcon className="sun-icon" />
-            <DarkModeIcon className="moon-icon" />
-            <div className="toggle-thumb" />
+            <button className='logout' onClick={handleLogout}><LogoutIcon /></button>
           </div>
-
-          <button className='logout' onClick={handleLogout}><LogoutIcon /></button>
         </div>
       </div>
     </div>

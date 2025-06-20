@@ -1,10 +1,12 @@
 .navbar {
   height: 100px;
+  /* width: 1500px; */
   background-color: #ffffff;
   display: flex;
   align-items: center;
   border-radius: 0;
   padding: 20px;
+  max-width: 100%;
 }
 
 .navbar img {
@@ -26,7 +28,7 @@
 
 .head .nav {
   display: flex;
-  margin-left: 380px;
+  margin-left: 150px;
   align-items: center;
   gap: 40px;
 }
@@ -38,7 +40,7 @@
   color: black;
 }
 
-.dash, .exam, .res {
+.dash, .exam, .question, .res {
   color: #000;
   display: flex;
   align-items: center;
@@ -51,13 +53,14 @@
   background: none;
 }
 
-.dash:hover, .exam:hover, .res:hover{
+.dash:hover, .exam:hover,.question:hover, .res:hover{
   color: #7E22CE;
   background-color: #F3E8FF;
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 .exam.active,
+.question.active,
 .res.active,
 .dash.active {
   background-color: #F3E8FF;
@@ -85,7 +88,9 @@
 .user .detail p {
   font-size: 20px;
 }
-
+.pro{
+  margin-left: -100px;
+}
 .profile {
   height: 50px;
   width: 50px;
@@ -96,6 +101,7 @@
 }
 
 .logout {
+  color: #000;
   border: none;
   background: none;
   cursor: pointer;

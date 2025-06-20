@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FacultyNav from './FacultyNav';
 import  {UploadQn}  from './UploadQn';
+import {QuestionBank} from './QuestionBank';
 import './Faculty.css';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
@@ -62,7 +63,7 @@ export const Faculty = () => {
             <h4>Upload Questions</h4>
             <p>Add new questions to your bank</p>
           </div>
-          <div className="faculty-box">
+          <div className="faculty-box" onClick={() => navigate('/question-bank')}>
             <NoteAddIcon className="faculty-icon purple-icon" />
             <h4>Question Bank</h4>
             <p>View and manage questions</p>

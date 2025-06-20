@@ -1,0 +1,81 @@
+.results-container {
+  padding: 20px 40px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.download-link {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #e0e0e0;
+}
+
+.results-table th, .results-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.subtitle {
+  color: #777;
+}
+
+.date {
+  color: #999;
+  font-size: 0.85rem;
+}
+
+.grade {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  display: inline-block;
+  min-width: 32px;
+  text-align: center;
+}
+
+/* .grade.A { background: #e0f7e9; color: #22c55e; }
+.grade[] { background: #e0eaff; color: #4f46e5; }
+.grade['A+'] { background: #e0fce0; color: #16a34a; }
+.grade['B+'] { background: #fff6dc; color: #facc15; } */
+
+.allowed {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.details-link {
+  color: #7c3aed;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.performance-trend {
+  margin-top: 40px;
+  background: #fafafa;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: #666;
+}
+
+.trend-placeholder {
+  margin-top: 20px;
+  padding: 30px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+}

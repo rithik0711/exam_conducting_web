@@ -1,8 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FacultyNav from './FacultyNav';
 import './UploadQn.css';
 
 export const UploadQn = () => {
+  const emptyQuestion = {
+    question: '',
+    options: ['', '', '', ''],
+    correctAnswer: '',
+    marks: 1
+  };
+
+  const [questions, setQuestions] = useState([emptyQuestion]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const addQuestionHandler = () => {
+    if (questions.length < 20) {
+      setQuestions([...questions, emptyQuestion]);
+      setCurrentIndex(questions.length); // move to new question
+    } else {
+      alert("Maximum of 20 questions reached.");
+    }
+  };
+
+  const handleChange = (field, value) => {
+    const updated = [...questions];
+    if (field === 'question') updated[currentIndex].question = value;
+    if (field === 'correctAnswer') updated[currentIndex].correctAnswer = value;
+    if (field === 'marks') updated[currentIndex].marks = value;
+    setQuestions(updated);
+  };
+
+  const handleOptionChange = (index, value) => {
+    const updated = [...questions];
+    updated[currentIndex].options[index] = value;
+    setQuestions(updated);
+  };
+
+  const goToPrevious = () => {
+    if (currentIndex > 0) setCurrentIndex(prev => prev - 1);
+  };
+
+  const goToNext = () => {
+    if (currentIndex < questions.length - 1) setCurrentIndex(prev => prev + 1);
+  };
+
   return (
     <>
       <div>
@@ -19,31 +60,31 @@ export const UploadQn = () => {
           <div className="sel-dept">
             <h3>Select Department</h3>
             <div className="checkbox-group">
-                  <label>
-                    <input type="checkbox" name="department" value="CSE" />
-                    Computer Science and Engineering
-                  </label>
-                  <label>
-                    <input type="checkbox" name="department" value="ECE" />
-                    Electronics and Communication Engineering
-                  </label>
-                  <label>
-                    <input type="checkbox" name="department" value="IT" />
-                    Information Technology
-                  </label>
-                  <label>
-                    <input type="checkbox" name="department" value="ISE" />
-                    Information Science & Engineering
-                  </label>
-                  <label>
-                    <input type="checkbox" name="department" value="MECH" />
-                    Mechanical Engineering
-                  </label>
-                  <label>
-                    <input type="checkbox" name="department" value="MZ" />
-                    Mechetronics Engineering
-                  </label>
-                </div>
+               <label>
+                <input type="checkbox" name="department" value="CSE" />
+                Computer Science and Engineering
+              </label>
+              <label>
+                <input type="checkbox" name="department" value="ECE" />
+                Electronics and Communication Engineering
+              </label>
+              <label>
+                <input type="checkbox" name="department" value="IT" />
+                Information Technology
+              </label>
+              <label>
+                <input type="checkbox" name="department" value="ISE" />
+                Information Science & Engineering
+              </label>
+              <label>
+                <input type="checkbox" name="department" value="MECH" />
+                Mechanical Engineering
+              </label>
+              <label>
+                <input type="checkbox" name="department" value="MZ" />
+                Mechatronics Engineering
+              </label>
+            </div>
           </div>
 
           <div className="subject">
@@ -55,45 +96,90 @@ export const UploadQn = () => {
               <h3>Topic</h3>
               <input type="text" placeholder="e.g., Binary Trees" />
             </div>
+            <div>
+              <h3>Timing</h3>
+              <input type="text" placeholder='e.g., 20 min'/>
+            </div>
+            <div>
+              <h3>Total Marks</h3>
+              <input type="text" placeholder='e.g., 20 marks'/>
+            </div>
           </div>
-          <div className='ques'>
+
+          <div className="ques">
+            <h2>Question {currentIndex + 1}</h2>
             <div className="add-ques">
-            <h3>Question</h3>
-            <input type="text" placeholder="Enter your question here..." />
+              <h3>Question</h3>
+              <textarea
+                  placeholder="Enter your question here..."
+                  value={questions[currentIndex].question}
+                  onChange={e => handleChange('question', e.target.value)}
+                  className="question-textarea"
+                />
             </div>
 
             <div className="options">
               <h3>Options</h3>
-              <div className="option-item">
-                <input type="radio" name="correctOption" />
-                <input type="text" placeholder="Option 1" />
-              </div>
-              <div className="option-item">
-                <input type="radio" name="correctOption" />
-                <input type="text" placeholder="Option 2" />
-              </div>
-              <div className="option-item">
-                <input type="radio" name="correctOption" />
-                <input type="text" placeholder="Option 3" />
-              </div>
-              <div className="option-item">
-                <input type="radio" name="correctOption" />
-                <input type="text" placeholder="Option 4" />
-              </div>
+              {questions[currentIndex].options.map((opt, i) => (
+                <div className="option-item" key={i}>
+                  <input type="radio" name={`correctOption-${currentIndex}`} />
+                  <input
+                    type="text"
+                    placeholder={`Option ${i + 1}`}
+                    value={opt}
+                    onChange={e => handleOptionChange(i, e.target.value)}
+                  />
+                </div>
+              ))}
               <p className="option-hint">Select the radio button for the correct answer</p>
-              <input type="text" placeholder='Correct answer' className='correct-ans'/>
+              <input
+                type="text"
+                placeholder="Correct answer"
+                className="correct-ans"
+                value={questions[currentIndex].correctAnswer}
+                onChange={e => handleChange('correctAnswer', e.target.value)}
+              />
             </div>
 
             <div className="marks-section">
               <h3>Marks</h3>
-              <input type="number" placeholder="1" />
+              <input
+                type="number"
+                placeholder="1"
+                value={questions[currentIndex].marks}
+                onChange={e => handleChange('marks', e.target.value)}
+              />
+            </div>
+
+            <div className="nav-buttons">
+              <button onClick={goToPrevious} disabled={currentIndex === 0} className='pre-but'>
+                Previous
+              </button>
+              <button
+                onClick={goToNext}
+                disabled={currentIndex >= questions.length - 1}
+              className='next-but'>
+                Next
+              </button>
             </div>
           </div>
+
           <div className="button-group">
-            <button className="add-btn">+ Add Another Question</button>
+            <button className="add-btn" onClick={addQuestionHandler}>
+              + Add Another Question
+            </button>
             <div>
               <button className="cancel-btn">Cancel</button>
-              <button className="save-btn">Save Questions</button>
+              <button
+                className="save-btn"
+                onClick={() => {
+                  localStorage.setItem('uploadedExamQuestions', JSON.stringify(questions));
+                  alert("Questions saved successfully!");
+                }}
+              >
+                Save Questions
+              </button>
+
             </div>
           </div>
         </div>

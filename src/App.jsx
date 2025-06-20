@@ -4,9 +4,11 @@ import { useNavigate, BrowserRouter as Router, Routes, Route } from 'react-route
 import './App.css';
 import Student from './Student/Student';
 import Faculty from './Faculty/Faculty';
+import Question from './Student/Question'
 import Exam from './Student/Exam';
 import Results from './Student/Results'; // 👈 Update the path if your Results.jsx file is located elsewhere
 import UploadQn from './Faculty/UploadQn';
+import QuestionBank from './Faculty/QuestionBank';
 import { jwtDecode } from "jwt-decode";
 import SchoolIcon from '@mui/icons-material/School';
 import { ResultsView } from './Faculty/ResultsView';
@@ -124,10 +126,12 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/student" element={<Student />} />
         <Route path="/faculty" element={<Faculty />} />
+        <Route path='/question' element={<Question />}/>
         <Route path="/exam" element={<Exam />} />
         <Route path="/results" element={<Results />} />
         <Route path="/upload-exam" element={<UploadQn />} />
-        <Route path="/results-view" element={<ResultsView />}></Route>
+        <Route path='/question-bank' element={<QuestionBank />}/>
+        <Route path="/results-view" element={<ResultsView />} />
       </Routes>
     </Router>
   );

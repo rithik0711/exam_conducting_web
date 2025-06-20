@@ -1,0 +1,96 @@
+.exam-container {
+  padding: 30px 40px;
+}
+
+.exam-container h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.exam-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid #eee;
+}
+
+.exam-info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.exam-info .subject {
+  color: #777;
+  margin-bottom: 8px;
+}
+
+.exam-meta span {
+  margin-right: 16px;
+  font-size: 14px;
+  color: #333;
+  display: inline-flex;
+  align-items: center;
+}
+
+.exam-meta svg {
+  margin-right: 4px;
+}
+
+.tags {
+  margin-top: 8px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-right: 6px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.hard {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.medium {
+  background-color: #fef9c3;
+  color: #d97706;
+}
+
+.easy {
+  background-color: #d1fae5;
+  color: #10b981;
+}
+
+.available {
+  background-color: #ccfbf1;
+  color: #0f766e;
+}
+
+.upcoming {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+.exam-action {
+  align-self: flex-end;
+}
+
+.start-btn {
+  background: linear-gradient(to right, #7c3aed, #6366f1);
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}

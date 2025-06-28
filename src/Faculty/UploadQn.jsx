@@ -43,6 +43,40 @@ export const UploadQn = () => {
   const goToNext = () => {
     if (currentIndex < questions.length - 1) setCurrentIndex(prev => prev + 1);
   };
+  const handleSave = async () => {
+  if (!subject || !topic || !fileData) {
+    alert('Please fill all fields and upload a PDF file.');
+    return;
+  }
+
+  const fileInput = document.getElementById('file-upload');
+  const file = fileInput.files[0];
+
+  const formData = new FormData();
+  formData.append('subject', subject);
+  formData.append('topic', topic);
+  formData.append('pdfFile', file);
+
+  try {
+    const res = await fetch('http://localhost:5000/faculty/upload', {
+      method: 'POST',
+      body: formData
+    });
+
+    if (res.ok) {
+      alert('Question uploaded successfully!');
+      setSubject('');
+      setTopic('');
+      setFileName('');
+      setFileData('');
+    } else {
+      alert('Upload failed');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Error uploading question');
+  }
+};
 
   return (
     <>

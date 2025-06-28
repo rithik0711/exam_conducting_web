@@ -8,7 +8,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-
+import SchoolIcon from '@mui/icons-material/School';
 export const FacultyNav = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
@@ -52,10 +52,12 @@ export const FacultyNav = () => {
 
     return (
         <div className="faculty-navbar">
-            <img src="/images/exam.png" alt="Exam Logo" className="faculty-logo" />
-            <div className="faculty-header">
+            <div className="faculty-brand">
+                <div className="faculty-logo"><SchoolIcon /></div>
                 <h3 className="faculty-title">Exam Portal</h3>
+            </div>
 
+            <div className="faculty-header">
                 <div className="faculty-nav">
                     {/* Left group */}
                     <div className="faculty-nav-group">
@@ -112,5 +114,4 @@ export const FacultyNav = () => {
         </div>
     );
 };
-
 export default FacultyNav;

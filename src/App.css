@@ -36,6 +36,10 @@ body{
   text-align: center;
   border: 10px solid rgb(94, 27, 176);
   padding: 0px 0px 15px 0px;
+  position: absolute;
+  top: 50%;
+  /* left: 50%; */
+  transform: translate(-50%, -50%);
 }
 .head{
   display: flex;

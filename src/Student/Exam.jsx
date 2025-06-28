@@ -1,5 +1,6 @@
 import React from 'react';
 import './Exam.css';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -35,11 +36,63 @@ const upcomingExams = [
 ];
 
 const Exam = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
       <Navbar />
       <div className="exam-container">
         <h2>Exams</h2>
+
+        {/* NEW WRAPPER */}
+        <div className="exam-stats-wrapper">
+          {/* Filter Tabs and Search Bar */}
+          <div className="exam-filters">
+            <div className="tabs">
+              <span className="tab active">All <span className="count">6</span></span>
+              <span className="tab">Upcoming Exam <span className="count">1</span></span>
+              <span className="tab">Ongoing Exam <span className="count">1</span></span>
+              <span className="tab">Completed <span className="count">2</span></span>
+            </div>
+            <div className="search-box">
+              <input type="text" placeholder="Search exams..." />
+            </div>
+          </div>
+
+          {/* Summary Boxes */}
+          <div className="exam-summary">
+            <div className="summary-card blue">
+              <div className="icon">📅</div>
+              <div>
+                <p className="label">Total Exams</p>
+                <h3>6</h3>
+              </div>
+            </div>
+            <div className="summary-card orange">
+              <div className="icon">⏱️</div>
+              <div>
+                <p className="label">Ongoing</p>
+                <h3>1</h3>
+              </div>
+            </div>
+            <div className="summary-card green">
+              <div className="icon">🏆</div>
+              <div>
+                <p className="label">Completed</p>
+                <h3>2</h3>
+              </div>
+            </div>
+            <div className="summary-card purple">
+              <div className="icon">📖</div>
+              <div>
+                <p className="label">Average Score</p>
+                <h3>90%</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Exam Cards List */}
         {upcomingExams.map((exam, index) => (
           <div className="exam-card" key={index}>
             <div className="exam-info">
@@ -51,13 +104,12 @@ const Exam = () => {
                 <span><AccessTimeIcon fontSize="small" /> {exam.duration}</span>
               </div>
               <div className="tags">
-                
                 <span className={`tag ${exam.status}`}>{exam.status}</span>
               </div>
             </div>
             {exam.button && (
               <div className="exam-action">
-                <button className="start-btn">Start Exam ➤</button>
+                <button className="start-btn" onClick={() => navigate('/start-exam')}>Start Exam ➤</button>
               </div>
             )}
           </div>

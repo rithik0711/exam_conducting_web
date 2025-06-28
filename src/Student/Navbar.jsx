@@ -6,6 +6,7 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
+import SchoolIcon from '@mui/icons-material/School';
 import { useNavigate } from 'react-router-dom';
 import './Navbar.css';
 export const Navbar = () => {
@@ -49,7 +50,7 @@ export const Navbar = () => {
 
   return (
     <div className="navbar">
-      <img src="/images/exam.png" alt="Exam Logo" />
+      <p className='img'><SchoolIcon/></p>
       <div className="head">
         <h3>Exam Portal</h3>
         <div className="nav">

@@ -13,12 +13,13 @@ import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { useNavigate } from 'react-router-dom';
-
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 export const Student = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDark, setIsDark] = useState(() => localStorage.getItem('theme') === 'dark');
   const navigate = useNavigate();
-
+  const [activeTab, setActiveTab] = useState('');
   const handleLogout = () => {
     localStorage.removeItem('user');
     navigate('/');
@@ -50,6 +51,23 @@ export const Student = () => {
       <div><Navbar /></div>
       <div className='content'>
         <h3 className='wel'>Welcome Back, {user.name}!</h3>
+        <div className='box-name'>
+          <div className={`box-exam attend-exam${activeTab === 'exam' ? 'active' : ''}`} onClick={() => {setActiveTab('exam');navigate('/exam')}}>
+            <AddRoundedIcon className="icon" />
+            <h4>Exams</h4>
+            <p>Click here to attend your upcoming exams...</p>
+          </div>
+          <div className={`box-question ${activeTab === 'question' ? 'active' : ''}`} onClick={() => {setActiveTab('question');navigate('/question')}}>
+            <NoteAddIcon className="icon" />
+            <h4>Question Bank</h4>
+            <p>Browse Uploaded Questions</p>
+          </div>
+          {/* <div className="faculty-box">
+            <SignalCellularAltIcon className="icon purple-icon" />
+            <h4>Analytics</h4>
+            <p>View performance insights</p>
+          </div> */}
+        </div>
         <div className='con'>
           <div className='up-exam'>
             <div className='card-1'><CalendarMonthIcon fontSize='large' /></div>
@@ -80,21 +98,21 @@ export const Student = () => {
             </div>
           </div>
         </div>
-        <div className='grapg-atten'>
-          <div className='graph'>
-            <h3>Graph</h3>
-            <div className="donut-chart">
-              <div className="donut-center"></div>
+          {/* <div className='grapg-atten'>
+            <div className='graph'>
+              <h3>Graph</h3>
+              <div className="donut-chart">
+                <div className="donut-center"></div>
+              </div>
+              <div className="legend">
+                <div><span className="pass-dot"></span> Pass</div>
+                <div><span className="fail-dot"></span> Fail</div>
+              </div>
             </div>
-            <div className="legend">
-              <div><span className="pass-dot"></span> Pass</div>
-              <div><span className="fail-dot"></span> Fail</div>
+            <div className="attented">
+              <h3>Attented Exams</h3>
             </div>
-          </div>
-          <div className="attented">
-            <h3>Attented Exams</h3>
-          </div>
-        </div>
+          </div> */}
       </div>
       <div className="tips">
         <h3>💡 <span className="tip-title">Quick Tip</span></h3>

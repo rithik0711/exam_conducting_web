@@ -7,7 +7,12 @@
   font-size: 24px;
   font-weight: 600;
 }
-
+.exam-filters{
+  background-color: #fff;
+  height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+}
 .exam-card {
   display: flex;
   justify-content: space-between;
@@ -93,4 +98,100 @@
   font-size: 14px;
   border-radius: 8px;
   cursor: pointer;
+}
+.exam-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.tabs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 16px;
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.tab.active {
+  background-color: #ede9fe;
+  color: #7c3aed;
+}
+
+.count {
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  margin-left: 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.search-box input {
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 480px;
+  margin-right: 40px;
+  background-color: #fff;
+}
+
+.exam-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
+}
+
+.summary-card .icon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+.summary-card .label {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.summary-card h3 {
+  font-size: 20px;
+  margin: 4px 0 0;
+}
+
+.summary-card.blue .icon {
+  color: #3b82f6;
+}
+
+.summary-card.orange .icon {
+  color: #f97316;
+}
+
+.summary-card.green .icon {
+  color: #10b981;
+}
+
+.summary-card.purple .icon {
+  color: #8b5cf6;
 }

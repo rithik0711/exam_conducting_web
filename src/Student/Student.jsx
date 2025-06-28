@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Student.css';
 import Navbar from './Navbar'
-import CloseIcon from '@mui/icons-material/Close';
-import LogoutIcon from '@mui/icons-material/Logout';
-import HomeIcon from '@mui/icons-material/Home';
-import EditNoteIcon from '@mui/icons-material/EditNote';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { useNavigate } from 'react-router-dom';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
@@ -62,65 +56,49 @@ export const Student = () => {
             <h4>Question Bank</h4>
             <p>Browse Uploaded Questions</p>
           </div>
-          {/* <div className="faculty-box">
-            <SignalCellularAltIcon className="icon purple-icon" />
-            <h4>Analytics</h4>
-            <p>View performance insights</p>
-          </div> */}
-        </div>
-        <div className='con'>
-          <div className='up-exam'>
-            <div className='card-1'><CalendarMonthIcon fontSize='large' /></div>
-            <div>
-              <p>Upcoming Exams</p>
-              <p>3</p>
-            </div>
-          </div>
-          <div className="score">
-            <div className='card-2'><EmojiEventsIcon fontSize='large' /></div>
-            <div>
-              <p>Total Score</p>
-              <p>280</p>
-            </div>
-          </div>
-          <div className='completed'>
-            <div className='card-3'><MenuBookIcon fontSize='large' /></div>
-            <div>
-              <p>Completed Exams</p>
-              <p>5</p>
-            </div>
-          </div>
-          <div className="rank">
-            <div className='card-4'><MilitaryTechIcon fontSize='large' /></div>
-            <div>
-              <p>Rank</p>
-              <p>2</p>
-            </div>
+          <div className={`box-result ${activeTab === 'results' ? 'active' : ''}`} onClick={() => {setActiveTab('results');navigate('/results')}}>
+            <WorkspacePremiumIcon className="icon" />
+            <h4>Result</h4>
+            <p></p>
           </div>
         </div>
-          {/* <div className='grapg-atten'>
-            <div className='graph'>
-              <h3>Graph</h3>
-              <div className="donut-chart">
-                <div className="donut-center"></div>
-              </div>
-              <div className="legend">
-                <div><span className="pass-dot"></span> Pass</div>
-                <div><span className="fail-dot"></span> Fail</div>
-              </div>
+        <div className="con">
+          <div className="stat-box total-exams">
+            <div className="stat-content">
+              <h4>Upcoming Exams</h4>
+              <p className="stat-value">6</p>
             </div>
-            <div className="attented">
-              <h3>Attented Exams</h3>
+            <MenuBookIcon className="stat-icon" />
+          </div>
+
+          <div className="stat-box avg-score">
+            <div className="stat-content">
+              <h4>Average Score</h4>
+              <p className="stat-value">87%</p>
             </div>
-          </div> */}
+            <MilitaryTechIcon className="stat-icon" />
+          </div>
+
+          <div className="stat-box high-score">
+            <div className="stat-content">
+              <h4>Completed</h4>
+              <p className="stat-value">95%</p>
+            </div>
+            <EmojiEventsIcon className="stat-icon" />
+          </div>
+
+          <div className="stat-box total-marks">
+            <div className="stat-content">
+              <h4>Total Marks</h4>
+              <p className="stat-value">520</p>
+            </div>
+            <WorkspacePremiumIcon className="stat-icon" />
+          </div>
+        </div>
+
+          
       </div>
-      <div className="tips">
-        <h3>💡 <span className="tip-title">Quick Tip</span></h3>
-        <p>
-          Use varied difficulty levels in your question bank to create comprehensive
-          assessments that challenge students appropriately.
-        </p>
-      </div>
+      
 
     </div>
   );

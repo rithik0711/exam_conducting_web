@@ -78,19 +78,18 @@
 .faculty-nav-exam.active,
 .faculty-nav-ques.active,
 .faculty-nav-res.active{
-  background-color: #F3E8FF;
+  background-color: #ffffff;
   color: #7E22CE;
   border-radius: 10px;
   padding: 5px 10px;
   transition: background-color 0.3s ease;
-  box-shadow: 0 6px 12px rgba(191, 142, 255, 0.8);
+  box-shadow: 0 6px 12px rgba(191, 142, 255, 0.9);
 }
 
 .faculty-nav-dash:hover, .faculty-nav-exam:hover,.faculty-nav-ques:hover, .faculty-nav-res:hover{
   color: #7E22CE;
   background-color: #F3E8FF;
   transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 .faculty-user {
   display: flex;

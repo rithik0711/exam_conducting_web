@@ -127,20 +127,6 @@ export default function Question({ user }) {
     return matchesSearch && matchesSubject && matchesTopic;
   });
 
-  // const getDifficultyColor = (difficulty) => {
-  //   switch (difficulty.toLowerCase()) {
-  //     case 'easy': return 'difficulty-easy';
-  //     case 'medium': return 'difficulty-medium';
-  //     case 'hard': return 'difficulty-hard';
-  //     default: return 'difficulty-default';
-  //   }
-  // };
-
-  // const getCompletionColor = (rate) => {
-  //   if (rate >= 80) return 'completion-high';
-  //   if (rate >= 60) return 'completion-medium';
-  //   return 'completion-low';
-  // };
 
   const toggleBookmark = (id) => {
     console.log(`Toggling bookmark for question set ${id}`);
@@ -253,25 +239,6 @@ export default function Question({ user }) {
                         </div>
                       </td>
 
-                      {/* <td className="table-cell">
-                        <div className="question-details">
-                          <div className="question-stats">
-                            <div className="stat-item">
-                              <BookOpen className="stat-item-icon" />
-                              <span className="stat-item-value">{set.questionCount}</span>
-                              <span className="stat-item-label">questions</span>
-                            </div>
-                            <div className="stat-item">
-                              <Clock className="stat-item-icon" />
-                              <span className="stat-item-value">{set.estimatedTime}m</span>
-                            </div>
-                          </div>
-                          <div className="question-meta">
-                            
-                            <span className="update-date">Updated {set.lastUpdated}</span>
-                          </div>
-                        </div>
-                      </td> */}
 
                       <td className="table-cell">
                         <div className="action-buttons">

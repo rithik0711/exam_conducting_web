@@ -34,7 +34,17 @@
   flex-direction: column;
   justify-content: center;
 }
-
+html.dark .faculty-box{
+  background-color: #121212;
+  color: #fff;
+  box-shadow: 0 6px 12px rgba(238, 169, 255, 0.8);
+}
+html.dark .faculty-box:hover{
+  box-shadow: 0 6px 12px rgba(111, 0, 255, 0.8);
+}
+html.dark .faculty-box p{
+  color: #fff;
+}
 .faculty-box:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(111, 0, 255, 0.8);

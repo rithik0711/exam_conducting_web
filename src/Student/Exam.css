@@ -1,3 +1,12 @@
+body {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: #f4f4f4;
+}
+
+html.dark body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
 .exam-container {
   padding: 30px 40px;
 }
@@ -195,3 +204,15 @@
 .summary-card.purple .icon {
   color: #8b5cf6;
 }
+
+html.dark body {
+  background-color: #000 !important;
+}
+
+/* html.dark .exam-container,
+html.dark .exam-filters,
+html.dark .exam-card,
+html.dark .summary-card,
+html.dark .search-box input {
+  background-color: #121212 !important;
+} */

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Search, Filter, BookOpen, Clock, Target, ChevronRight, Eye, Download, Star, Brain, Lightbulb, Play, FileText, Calendar, Award, TrendingUp } from 'lucide-react';
 import './Question.css';
 import Navbar from './Navbar';
-
+// import axios from 'axios';
 export default function Question({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedSubject, setSelectedSubject] = useState('all');
   const [selectedTopic, setSelectedTopic] = useState('all');
   const [viewMode, setViewMode] = useState('table');
-
+  
   const questionSets = [
     {
       id: 1,
@@ -131,6 +131,19 @@ export default function Question({ user }) {
   const toggleBookmark = (id) => {
     console.log(`Toggling bookmark for question set ${id}`);
   };
+  const handleOpen = (fileBase64) => {
+  const link = document.createElement('a');
+  link.href = `data:application/pdf;base64,${fileBase64}`;
+  link.target = '_blank';
+  link.click();
+};
+
+const handleDownload = (fileBase64, fileName) => {
+  const link = document.createElement('a');
+  link.href = `data:application/pdf;base64,${fileBase64}`;
+  link.download = fileName;
+  link.click();
+};
 
   return (
     <div className="question-bank-container">
@@ -242,14 +255,16 @@ export default function Question({ user }) {
 
                       <td className="table-cell">
                         <div className="action-buttons">
-                          <button className="action-btn action-btn-open">
+                          <button className="action-btn action-btn-open" onClick={() => handleOpen(set.fileBase64)}>
                             <Play className="action-icon" />
                             Open
                           </button>
-                          <button className="action-btn action-btn-download">
+
+                          <button className="action-btn action-btn-download" onClick={() => handleDownload(set.fileBase64, set.title + '.pdf')}>
                             <Download className="action-icon" />
                             Download
                           </button>
+
                         </div>
                       </td>
                     </tr>

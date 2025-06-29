@@ -35,6 +35,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 8px 16px rgba(216, 67, 214, 0.15);
+  transition: transform 0.3s ease;
+
 }
 
 .performance-intro h1 {
@@ -142,7 +145,12 @@
   color: #666;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
-
+.tropy-icon{
+  /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); */
+  /* transition: transform 0.3s ease; */
+  font-size: 40px !important;
+  color: #fff;
+}
 .trend-placeholder {
   margin-top: 20px;
   padding: 30px;
@@ -158,6 +166,16 @@ html.dark .search-input-wrapper,
 html.dark .results-table,
 html.dark .trend-placeholder {
   background-color: #1f2937;
+  color: #f9fafb;
+}
+/* Fix for performance-intro section in dark mode */
+html.dark .performance-intro h1 {
+  /* background-color: #111827; */
+  color: #ffffff;
+}
+
+/* Fix for results-header h2 in dark mode */
+html.dark .results-header h2 {
   color: #f9fafb;
 }
 

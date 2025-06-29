@@ -55,7 +55,7 @@ const Results = () => {
         </div>
         <div className="performance-intro">
           <div className="intro-icon">
-            <EmojiEventsIcon style={{ fontSize: 50, color: '#ffffff' }} />
+            <EmojiEventsIcon className='tropy-icon' />
           </div>
           <h1>Student Performance</h1>
           <p>Track your learning journey and celebrate your achievements across all subjects</p>

@@ -13,6 +13,11 @@ export const QuestionBank = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file && file.type === 'application/pdf') {
+      if (file.size > 5 * 1024 * 1024) { // 5 MB limit
+        alert("PDF size must be less than 5MB");
+        return;
+      }
+
       setFileName(file.name);
       const reader = new FileReader();
       reader.onload = () => {
@@ -24,34 +29,33 @@ export const QuestionBank = () => {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!subject || !topic || !fileName || !fileData) {
       alert('Please fill all fields and upload a PDF file.');
       return;
     }
 
-    const newQuestion = { subject, topic, fileName, fileData };
-    const existing = JSON.parse(localStorage.getItem('questionBank')) || [];
+    try {
+      const response = await fetch('http://localhost:5000/faculty/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subject, topic, fileName, fileData })
+      });
 
-    // Optional: Check for duplicates
-    const isDuplicate = existing.some(q =>
-      q.subject === subject &&
-      q.topic === topic &&
-      q.fileName === fileName
-    );
-    if (isDuplicate) {
-      alert('This question file already exists.');
-      return;
+      const result = await response.json();
+      if (response.ok) {
+        alert(result.message);
+        setSubject('');
+        setTopic('');
+        setFileName('');
+        setFileData('');
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      alert('Upload failed');
+      console.error(error);
     }
-
-    existing.push(newQuestion);
-    localStorage.setItem('questionBank', JSON.stringify(existing));
-
-    alert('Question saved successfully!');
-    setSubject('');
-    setTopic('');
-    setFileName('');
-    setFileData('');
   };
 
   return (
@@ -99,13 +103,20 @@ export const QuestionBank = () => {
         </div>
 
         <div className="button-row">
-          <button className="cancel-btn" onClick={() => {
-            setSubject('');
-            setTopic('');
-            setFileName('');
-            setFileData('');
-          }}>Cancel</button>
-          <button className="set-btn" onClick={handleSave}>Save Questions</button>
+          <button
+            className="cancel-btn"
+            onClick={() => {
+              setSubject('');
+              setTopic('');
+              setFileName('');
+              setFileData('');
+            }}
+          >
+            Cancel
+          </button>
+          <button className="set-btn" onClick={handleSave}>
+            Save Questions
+          </button>
         </div>
       </div>
     </div>

@@ -1,5 +1,13 @@
 /* StudentQuestionBank Component Styles */
+body {
+  font-family: 'Poppins', sans-serif !important;
+  background-color: #f4f4f4;
+}
 
+html.dark body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
 .question-bank-container {
   max-width: 1800px;
   background-color: #f9fafb;

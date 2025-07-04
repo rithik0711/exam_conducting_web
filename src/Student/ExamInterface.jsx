@@ -1,17 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, AlertCircle, X, RotateCcw, Send } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Clock, ChevronLeft, ChevronRight, Flag, CheckCircle, AlertCircle, X, RotateCcw, Send, Camera, CameraOff } from 'lucide-react';
 import './ExamInterface.css';
 import { useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
+import io from 'socket.io-client';
+
 export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [timeLeft, setTimeLeft] = useState(3600); // 60 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(1200);
   const [flaggedQuestions, setFlaggedQuestions] = useState(new Set());
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [showExitDialog, setShowExitDialog] = useState(false);
+  
+  // Face detection states
+  const [recordingSessionId, setRecordingSessionId] = useState(null);
+  const [isRecording, setIsRecording] = useState(false);
+  const [cameraError, setCameraError] = useState(null);
+  const [faceDetectionAlerts, setFaceDetectionAlerts] = useState([]);
+  const socket = io('http://localhost:5000');
+  const socketRef = useRef(null);
+
+  const videoRef = useRef(null);
   const navigate = useNavigate();
-  // Sample exam questions
+
+  // Sample exam data (keep your existing data)
   const examData = {
     title: 'Physics Mid-term Exam',
     subject: 'Quantum Mechanics',
@@ -76,6 +89,7 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
     ]
   };
 
+  // Timer effect
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -90,64 +104,167 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
     return () => clearInterval(timer);
   }, []);
 
-  
+  // Fullscreen and security effects
   useEffect(() => {
-  const enterFullScreen = () => {
-    const el = document.documentElement;
-    if (el.requestFullscreen) el.requestFullscreen();
-    else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    else if (el.msRequestFullscreen) el.msRequestFullscreen();
-  };
+    const enterFullScreen = () => {
+      const el = document.documentElement;
+      if (el.requestFullscreen) el.requestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    };
 
-  const exitFullScreen = () => {
-    if (document.exitFullscreen) document.exitFullscreen();
-    else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    else if (document.msExitFullscreen) document.msExitFullscreen();
-  };
+    const exitFullScreen = () => {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    };
 
-  const isFullScreen = () =>
-    document.fullscreenElement || document.webkitFullscreenElement ||
-    document.mozFullScreenElement || document.msFullscreenElement;
+    const isFullScreen = () =>
+      document.fullscreenElement || document.webkitFullscreenElement ||
+      document.mozFullScreenElement || document.msFullscreenElement;
 
-  // Automatically enter fullscreen on mount
-  enterFullScreen();
+    // Enter fullscreen on mount
+    enterFullScreen();
 
-  const handleKeyDown = (e) => {
-    // Disable clipboard shortcuts
-    if (e.ctrlKey && ['v', 'c', 'x', 'a'].includes(e.key.toLowerCase())) {
-      e.preventDefault();
-      return;
-    }
+    const handleKeyDown = (e) => {
+      // Disable clipboard shortcuts
+      if (e.ctrlKey && ['v', 'c', 'x', 'a'].includes(e.key.toLowerCase())) {
+        e.preventDefault();
+        return;
+      }
 
-    // ESC key: exit fullscreen OR go back
-    if (e.key === 'Escape') {
+      // ESC key handling
+      if (e.key === 'Escape') {
+        if (isFullScreen()) {
+          exitFullScreen();
+        } else {
+          window.history.back();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
       if (isFullScreen()) {
         exitFullScreen();
+      }
+    };
+  }, []);
+
+  // Face detection and camera setup
+  useEffect(() => {
+    startCameraAndRecording();
+    
+    // Cleanup on unmount
+    return () => {
+      stopRecording();
+      stopCamera();
+    };
+  }, []);
+
+  const startCameraAndRecording = async () => {
+    try {
+      // Start camera
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user" },
+        audio: false
+      });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+      }
+
+      // Start backend recording
+      const response = await fetch('/api/start-exam-recording', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          examId: examId || 'test-exam',
+          studentId: 'student-123' // Replace with actual student ID
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        setRecordingSessionId(data.sessionId);
+        setIsRecording(true);
+        console.log('✅ Face detection recording started:', data.sessionId);
       } else {
-        window.history.back(); // Navigate to previous page
+        console.error('❌ Failed to start recording:', data.error);
+        setCameraError('Failed to start exam recording');
+      }
+
+    } catch (error) {
+      console.error('❌ Camera/Recording error:', error);
+      setCameraError('Camera access denied or unavailable');
+    }
+  };
+
+  const stopRecording = async () => {
+    if (recordingSessionId) {
+      try {
+        const response = await fetch('/api/stop-exam-recording', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            sessionId: recordingSessionId
+          })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          console.log('✅ Recording stopped successfully');
+          setIsRecording(false);
+          setRecordingSessionId(null);
+        }
+      } catch (error) {
+        console.error('❌ Error stopping recording:', error);
       }
     }
   };
-
-  document.addEventListener('keydown', handleKeyDown);
-
-  return () => {
-    document.removeEventListener('keydown', handleKeyDown);
-    if (isFullScreen()) {
-      exitFullScreen();
+  
+  const stopCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      const stream = videoRef.current.srcObject;
+      const tracks = stream.getTracks();
+      tracks.forEach(track => track.stop());
     }
   };
-}, []);
 
- 
+  // Check recording status periodically
+  useEffect(() => {
+    if (recordingSessionId) {
+      const checkStatus = setInterval(async () => {
+        try {
+          const response = await fetch(`/api/recording-status/${recordingSessionId}`);
+          const data = await response.json();
+          
+          if (!data.active) {
+            setIsRecording(false);
+            setRecordingSessionId(null);
+          }
+        } catch (error) {
+          console.error('Error checking recording status:', error);
+        }
+      }, 10000); // Check every 10 seconds
+
+      return () => clearInterval(checkStatus);
+    }
+  }, [recordingSessionId]);
 
   const formatTime = (seconds) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
+    const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
   };
 
   const handleAnswerSelect = (optionIndex) => {
@@ -189,14 +306,18 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
     setFlaggedQuestions(newFlagged);
   };
 
-  const handleSubmitExam = () => {
+  const handleSubmitExam = async () => {
+    // Stop recording before submitting
+    await stopRecording();
+    
     const score = calculateScore();
     onExamComplete({
       examId,
       score,
       answers,
       timeSpent: 3600 - timeLeft,
-      totalQuestions: examData.totalQuestions
+      totalQuestions: examData.totalQuestions,
+      recordingSessionId
     });
   };
 
@@ -275,7 +396,8 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
               <button
                 onClick={handleSubmitExam}
                 className="btn btn-primary"
-              ><SendIcon className='sub-icon'/>
+              >
+                <SendIcon className='sub-icon'/>
                 Submit Exam
               </button>
             </div>
@@ -306,7 +428,10 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
                 Stay in Exam
               </button>
               <button
-                onClick={()=>navigate('/exam')}
+                onClick={async () => {
+                  await stopRecording();
+                  navigate('/exam');
+                }}
                 className="btn btn-danger"
               >
                 Exit Exam
@@ -339,6 +464,40 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
             </div>
           </div>
           
+          {/* Enhanced Camera Container */}
+          <div className="camera-container">
+            <div className="camera-wrapper">
+              <video 
+                ref={videoRef}
+                autoPlay 
+                muted 
+                playsInline 
+                className="camera-feed"
+              />
+              <div className="camera-overlay">
+                <div className="recording-indicator">
+                  {isRecording ? (
+                    <div className="recording-active">
+                      <div className="recording-dot"></div>
+                      <span>Recording</span>
+                    </div>
+                  ) : (
+                    <div className="recording-inactive">
+                      <CameraOff size={16} />
+                      <span>Camera Off</span>
+                    </div>
+                  )}
+                </div>
+                {cameraError && (
+                  <div className="camera-error">
+                    <AlertCircle size={16} />
+                    <span>{cameraError}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          
           <div className="header-right">
             <div className="timer-container">
               <Clock className="timer-icon" />
@@ -357,7 +516,6 @@ export default function ExamInterface({ examId, onExamComplete, onExitExam }) {
           </div>
         </div>
       </div>
-
       <div className="exam-content">
         <div className="exam-grid">
           {/* Question Navigation Panel */}

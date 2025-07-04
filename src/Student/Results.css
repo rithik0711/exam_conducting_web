@@ -71,7 +71,7 @@
 .search-input-wrapper {
   display: flex;
   align-items: center;
-  background: #f3f4f6;
+  background: #ffffff;
   padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
@@ -165,7 +165,7 @@ html.dark .performance-trend,
 html.dark .search-input-wrapper,
 html.dark .results-table,
 html.dark .trend-placeholder {
-  background-color: #1f2937;
+  background-color: #000000;
   color: #f9fafb;
 }
 /* Fix for performance-intro section in dark mode */
@@ -186,15 +186,24 @@ html.dark .search-input {
 }
 
 html.dark .results-table th {
-  background-color: #374151;
+  background-color: #000000;
 }
 
 html.dark .search-input-wrapper {
-  background-color: #374151;
+  background-color: #ffffff;
   border-color: #4b5563;
 }
 
 html.dark .trend-placeholder {
-  border-color: #6b7280;
+  border-color: #ffffff;
   background-color: #111827;
+}
+html.dark .srh-container{
+  background-color: #000000;
+  box-shadow: 0 0 10px #e0e0e0;
+
+}
+html.dark .search-input{
+  color: #000000;
+  background-color: #ffffff;
 }

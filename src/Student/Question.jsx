@@ -173,7 +173,7 @@ const handleDownload = (fileBase64, fileName) => {
             <div className="search-container">
               <label className="filter-label">Search</label>
               <div className="search-input-wrapper">
-                <Search className="search-icon" />
+                <Search className="ques-search-icon" />
                 <input
                   type="text"
                   value={searchTerm}

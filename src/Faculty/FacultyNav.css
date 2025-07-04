@@ -128,7 +128,8 @@
 
 .faculty-profile-box {
   position: absolute;
-  margin-top: 20px;
+  margin-top: 275px;
+  /* margin-left: 50px; */
   right: 250px;
   width: 500px;
   display: flex;

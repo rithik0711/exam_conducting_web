@@ -173,7 +173,7 @@ html.dark body {
   margin-bottom: 0.5rem;
 }
 
-.ques-search-input-wrapper {
+.search-input-wrapper {
   position: relative;
 }
 
@@ -252,10 +252,12 @@ html.dark body {
 }
 
 .table-head {
-  background-color: #f9fafb;
+  background-color: #ebf5ff;
   border-bottom: 1px solid #e5e7eb;
 }
-
+/* html.dark .table-head{
+  background-color: #2d3748;
+} */
 .table-header-cell {
   padding: 1rem 1.5rem;
   text-align: left;
@@ -267,18 +269,22 @@ html.dark body {
 }
 
 .table-body {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
-
+html.dark .table-body{
+  background-color: #2d3748;
+}
 .table-row {
   border-bottom: 1px solid #e5e7eb;
   transition: background-color 0.2s;
 }
 
 .table-row:hover {
-  background-color: #f9fafb;
+  background-color: #eeeeee;
 }
-
+html.dark .table-row:hover{
+  background-color: #787878;
+}
 .table-cell {
   padding: 1.5rem;
   vertical-align: top;
@@ -778,21 +784,24 @@ html.dark body {
   background-color: #0f0f0f !important;
   color: #e5e7eb !important;
 }
-
+html.dark .page-title{
+  color: #e5e7eb !important;
+}
+html.dark .search-input-wrapper{
+  color: #000000 !important;
+}
 html.dark .question-bank-container,
 html.dark .filters-section,
-html.dark .table-container,
 html.dark .grid-card,
 html.dark .card-action-secondary,
-html.dark .filter-select,
-html.dark .search-input {
+html.dark .filter-select{
   background-color: #1a1a1a !important;
-  color: #e5e7eb !important;
-  border-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+  box-shadow: 0 0 10px #e0e0e0;
 }
 
 html.dark .table-header {
-  background: linear-gradient(135deg, #2e1065, #0c4a6e) !important;
+  background: linear-gradient(135deg, #37019a, #230041) !important;
 }
 
 html.dark .table-head {
@@ -805,7 +814,7 @@ html.dark .subject-name,
 html.dark .stat-item-value,
 html.dark .card-title,
 html.dark .card-stat-value {
-  color: #f3f4f6 !important;
+  color: #ffffff !important;
 }
 
 html.dark .card-description,
@@ -877,4 +886,7 @@ html.dark .card-action-secondary {
 }
 html.dark .card-action-secondary:hover {
   background-color: #262626;
+}
+html.dark .table-title{
+  color: #dcfce7;
 }

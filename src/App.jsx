@@ -13,6 +13,7 @@ import { jwtDecode } from "jwt-decode";
 import SchoolIcon from '@mui/icons-material/School';
 import { ResultsView } from './Faculty/ResultsView';
 import  ExamInterface  from './Student/ExamInterface';
+import  Rules  from './Student/Rules';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -133,7 +134,8 @@ const App = () => {
         <Route path="/upload-exam" element={<UploadQn />} />
         <Route path='/question-bank' element={<QuestionBank />}/>
         <Route path="/results-view" element={<ResultsView />} />
-        <Route path='/start-exam' element={<ExamInterface />}></Route>
+        <Route path='/start-exam' element={<ExamInterface />} />
+        <Route path='/rules-chart' element={<Rules />}/>
       </Routes>
     </Router>
   );

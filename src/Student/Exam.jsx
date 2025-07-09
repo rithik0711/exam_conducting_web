@@ -109,7 +109,7 @@ const Exam = () => {
             </div>
             {exam.button && (
               <div className="exam-action">
-                <button className="start-btn" onClick={() => navigate('/start-exam')}>Start Exam ➤</button>
+                <button className="start-btn" onClick={() => navigate('/rules-chart')}>Start Exam ➤</button>
               </div>
             )}
           </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Student.css';
 import Navbar from './Navbar'
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -47,7 +48,7 @@ export const Student = () => {
         <h3 className='wel'>Welcome Back, {user.name}!</h3>
         <div className='box-name'>
           <div className={`box-exam attend-exam${activeTab === 'exam' ? 'active' : ''}`} onClick={() => {setActiveTab('exam');navigate('/exam')}}>
-            <AddRoundedIcon className="icon" />
+            <AssignmentIcon className="icon" />
             <h4>Exams</h4>
             <p>Click here to attend your upcoming exams...</p>
           </div>

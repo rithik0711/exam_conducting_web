@@ -4,6 +4,8 @@ import  {UploadQn}  from './UploadQn';
 import {QuestionBank} from './QuestionBank';
 import './Faculty.css';
 import { useNavigate } from 'react-router-dom';
+// import EditSquareIcon from '@mui/icons-material/EditSquare';
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import LogoutIcon from '@mui/icons-material/Logout';
 import HomeIcon from '@mui/icons-material/Home';
@@ -61,22 +63,22 @@ export const Faculty = () => {
           <div className="faculty-box faculty-upload-box" onClick={() => navigate('/upload-exam')}>
             <AddRoundedIcon className="faculty-icon" />
             <h4>Upload Questions</h4>
-            <p>Add new questions to your bank</p>
+            <p>Create and submit individual questions manually for your exam.</p>
           </div>
-          <div className="faculty-box" onClick={() => navigate('/question-bank')}>
+          <div className="faculty-box faculty-viewques">
+            <DriveFileRenameOutlineIcon className="faculty-icon purple-icon" />
+            <h4>Manage Uploaded Question</h4>
+            <p>View, edit, or delete the questions you've uploaded manually.</p>
+          </div>
+          <div className="faculty-box faculty-uploadbank" onClick={() => navigate('/question-bank')}>
             <NoteAddIcon className="faculty-icon purple-icon" />
-            <h4>Question Bank</h4>
-            <p>View and manage questions</p>
+            <h4>Upload Question Bank</h4>
+            <p>Bulk upload a set of questions using a PDF file.</p>
           </div>
-          <div className="faculty-box">
-            <SignalCellularAltIcon className="faculty-icon purple-icon" />
-            <h4>Analytics</h4>
-            <p>View performance insights</p>
-          </div>
-          <div className="faculty-box">
-            <EmojiEventsIcon className="faculty-icon purple-icon" />
-            <h4>Students</h4>
-            <p>125 active students</p>
+          <div className="faculty-box faculty-viewbank">
+            <DriveFileRenameOutlineIcon className="faculty-icon purple-icon" />
+            <h4>Manage Question Bank</h4>
+            <p>Browse and manage the full question bank uploaded by you.</p>
           </div>
         </div>
       </div>

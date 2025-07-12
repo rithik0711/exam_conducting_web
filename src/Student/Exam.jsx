@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 const upcomingExams = [
   {
     title: 'Mathematics Final Exam',
@@ -62,28 +63,28 @@ const Exam = () => {
           {/* Summary Boxes */}
           <div className="exam-summary">
             <div className="summary-card blue">
-              <div className="icon">📅</div>
+              <div className="icon"><CalendarMonthIcon /></div>
               <div>
                 <p className="label">Total Exams</p>
                 <h3>6</h3>
               </div>
             </div>
             <div className="summary-card orange">
-              <div className="icon">⏱️</div>
+              <div className="icon"><AccessTimeIcon /></div>
               <div>
                 <p className="label">Ongoing</p>
                 <h3>1</h3>
               </div>
             </div>
             <div className="summary-card green">
-              <div className="icon">🏆</div>
+              <div className="icon"><EmojiEventsIcon /></div>
               <div>
                 <p className="label">Completed</p>
                 <h3>2</h3>
               </div>
             </div>
             <div className="summary-card purple">
-              <div className="icon">📖</div>
+              <div className="icon"><MenuBookIcon /></div>
               <div>
                 <p className="label">Average Score</p>
                 <h3>90%</h3>
